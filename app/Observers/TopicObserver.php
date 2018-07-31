@@ -19,6 +19,7 @@ class TopicObserver
         //
     }
     function saving(Topic $topic){
+      $topic->body= clean($this->body, 'user_topic_body');
       $topic->excerpt=make_excerpt($topic->body);
     }
 }
