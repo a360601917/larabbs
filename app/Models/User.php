@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Auth;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable {
 
-  //重写trait类的notify方法
+  use HasRoles;
+
+//重写trait类的notify方法
   use Notifiable {
     notify as protected laravelNotify;
   }
-  
+
   public function notify($instance) {
     // 如果要通知的人是当前用户，就不必通知了！
 //    if ($this->id == Auth::id()) {
