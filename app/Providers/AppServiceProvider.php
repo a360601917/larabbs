@@ -3,11 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
 use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider {
-
 
   /**
    * Bootstrap any application services.
@@ -18,7 +16,7 @@ class AppServiceProvider extends ServiceProvider {
     \Carbon\Carbon::setLocale('zh');
     \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
     \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
-    
+
     Schema::defaultStringLength(128);
   }
 
@@ -28,7 +26,9 @@ class AppServiceProvider extends ServiceProvider {
    * @return void
    */
   public function register() {
-    //
+    if (app()->isLocal()) {
+      $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
+    }
   }
 
 }
