@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+//use Illuminate\Foundation\Http\FormRequest;
 use Auth;
 
 class UserRequest extends FormRequest {
@@ -12,9 +12,9 @@ class UserRequest extends FormRequest {
    *
    * @return bool
    */
-  public function authorize() {
-    return TRUE;
-  }
+//  public function authorize() {
+//    return TRUE;
+//  }
 
   /**
    * Get the validation rules that apply to the request.
