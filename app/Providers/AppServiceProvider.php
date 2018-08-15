@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider {
     \App\Models\Link::observe(\App\Observers\LinkObserver::class);
 
     \Carbon\Carbon::setLocale('zh');
-    
+
     Schema::defaultStringLength(128);
   }
 
@@ -32,6 +32,12 @@ class AppServiceProvider extends ServiceProvider {
     if (app()->isLocal()) {
       $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
     }
+    \API::error(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+      abort(404);
+    });
+    \API::error(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
+      abort(403, $exception->getMessage());
+    });
   }
 
 }
